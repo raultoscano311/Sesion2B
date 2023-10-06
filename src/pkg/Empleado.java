@@ -4,7 +4,7 @@ public class Empleado {
 	
 	public enum TipoEmpleado{Vendedor, Encargado};
 	
-	float calculoNominaBruta(TipoEmpleado tipo, float ventasMes, float horasExtra) {
+	public float calculoNominaBruta(TipoEmpleado tipo, float ventasMes, float horasExtra) {
 		float salariobase=0, primas=0, extras=0;
 		final int PRECIO_HE=30;
 		
@@ -19,14 +19,17 @@ public class Empleado {
 		else if(ventasMes>=1000)
 			primas=100;
 		
-		extras=horasExtra*PRECIO_HE;
+		if(horasExtra>0)
+			extras=horasExtra*PRECIO_HE;
 		
 		return salariobase+primas+extras;
 	}
 	
 	
-	float calculoNominaNeta(float nominaBruta) {
+	public float calculoNominaNeta(float nominaBruta) {
 		float retencion;
+		if(nominaBruta<0)
+			return 0;
 		if(nominaBruta<2100)
 			retencion=0;
 		else if(nominaBruta>=2100 && nominaBruta<2500)
